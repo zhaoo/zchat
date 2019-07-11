@@ -1,7 +1,7 @@
 {
   "name": "zchat_client",
   "version": "0.1.0",
-  "description": "An Instant Messaging Software",
+  "description": "An IM App",
   "author": "zhaoo <izhaoo@163.com>",
   "license": "MIT",
   "scripts": {

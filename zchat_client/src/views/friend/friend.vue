@@ -21,7 +21,7 @@
     <section class="list-section">
       <van-index-bar>
         <van-index-anchor>AI机器人</van-index-anchor>
-        <van-cell title="小兆同学" to="robot" icon="/avatar/robot.jpg" clickable size="large" />
+        <van-cell title="小兆同学" to="robot" :icon="require('@/static/avatar/robot.jpg')" clickable size="large" />
       </van-index-bar>
     </section>
     <section class="list-section">
@@ -30,14 +30,14 @@
         <van-cell
           title="快递查询"
           to="express"
-          icon="/avatar/express.jpg"
+          :icon="require('@/static/avatar/express.jpg')"
           clickable
           size="large"
         />
         <van-cell
           title="天气查询"
           to="weather"
-          icon="/avatar/weather.jpg"
+          :icon="require('@/static/avatar/weather.jpg')"
           clickable
           size="large"
         />

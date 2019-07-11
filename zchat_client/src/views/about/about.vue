@@ -4,7 +4,7 @@
       <nav-bar title="关于" :left-text="'返回'" :left-arrow="true" />
     </header>
     <section class="logo-section">
-      <img src="/logo.png" class="logo" />
+      <img src="@/static/logo.png" class="logo" />
       <span class="version">{{ version }}</span>
     </section>
     <section class="info-section">

@@ -11,7 +11,7 @@
       >
         <img
           class="avatar"
-          :src="item.type=='send'?user.avatar[0].content:'/avatar/robot.jpg'"
+          :src="item.type=='send'?user.avatar[0].content:require('@/static/avatar/robot.jpg')"
         />
         <div class="message" v-html="item.content"></div>
       </div>
