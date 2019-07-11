@@ -9,7 +9,7 @@
     </section>
     <section class="info-section">
       <van-cell title="更新" is-link url="https://github.com/izhaoo/zchat/releases" />
-      <van-cell title="帮助" is-link url="https://github.com/izhaoo/zchat/README.md" />
+      <van-cell title="帮助" is-link url="https://github.com/izhaoo/zchat/blob/master/README.md" />
       <van-cell title="反馈" is-link url="https://github.com/izhaoo/zchat/issues" />
     </section>
     <footer>
