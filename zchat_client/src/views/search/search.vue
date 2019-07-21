@@ -4,42 +4,46 @@
       <nav-bar title="搜索" :left-text="'返回'" :left-arrow="true" />
       <section class="search-section">
         <van-search placeholder="搜索" />
-        <div v-if="type=='message'||type=='collect'">
-          <div
-            class="item"
-            v-for="(item, index) in list"
-            :key="index"
-            @click="type=='collect'?goDetailed(item._id):goChat(user.id==item.from?item.to:item.from)"
-          >
-            <img class="avatar" :src="item.avatar[0].content" />
-            <div class="content">
-              <span class="nickname">{{ item.nickname }}</span>
-              <span class="time">{{ item.time | moment('YYYY-MM-DD') }}</span>
-              <p class="msg van-ellipsis">{{ item.content }}</p>
+        <van-skeleton title avatar :row="3" :loading="loading">
+          <div v-if="type=='message'||type=='collect'">
+            <div
+              class="item"
+              v-for="(item, index) in list"
+              :key="index"
+              @click="type=='collect'?goDetailed(item._id):goChat(user.id==item.from?item.to:item.from)"
+            >
+              <img class="avatar" :src="item.avatar[0].content" />
+              <div class="content">
+                <span class="nickname">{{ item.nickname }}</span>
+                <span class="time">{{ item.time | moment('YYYY-MM-DD') }}</span>
+                <p class="msg van-ellipsis">{{ item.content }}</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div v-if="type=='friend'">
-          <van-index-bar>
-            <van-index-anchor>朋友</van-index-anchor>
-            <van-cell
-              v-for="item in list"
-              :key="item.id"
-              :title="item.nickname"
-              :to="{ name: 'chat', params: {uid: item._id}}"
-              :icon="item.avatar[0].content"
-              clickable
-              size="large"
-            />
-          </van-index-bar>
-        </div>
+        </van-skeleton>
+        <van-skeleton title avatar :row="3" :loading="loading">
+          <div v-if="type=='friend'">
+            <van-index-bar>
+              <van-index-anchor>朋友</van-index-anchor>
+              <van-cell
+                v-for="item in list"
+                :key="item.id"
+                :title="item.nickname"
+                :to="{ name: 'chat', params: {uid: item._id}}"
+                :icon="item.avatar[0].content"
+                clickable
+                size="large"
+              />
+            </van-index-bar>
+          </div>
+        </van-skeleton>
       </section>
     </header>
   </div>
 </template>
 
 <script>
-import { Search, Toast, IndexBar, IndexAnchor, Cell } from "vant";
+import { Search, Toast, IndexBar, IndexAnchor, Cell, Skeleton } from "vant";
 import { NavBar } from "@/components";
 import { searchFriend } from "@/api/user";
 import { searchCollect } from "@/api/collect";
@@ -54,13 +58,15 @@ export default {
     [Toast.name]: Toast,
     [IndexBar.name]: IndexBar,
     [IndexAnchor.name]: IndexAnchor,
-    [Cell.name]: Cell
+    [Cell.name]: Cell,
+    [Skeleton.name]: Skeleton
   },
   data() {
     return {
       list: {},
       type: "",
-      keyword: ""
+      keyword: "",
+      loading: true
     };
   },
   computed: {
@@ -94,6 +100,7 @@ export default {
         }
       });
     }
+    this.loading = false;
   },
   methods: {
     goDetailed(id) {

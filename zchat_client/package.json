@@ -1,6 +1,6 @@
 {
   "name": "zchat_client",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "An IM App",
   "author": "zhaoo <izhaoo@163.com>",
   "license": "MIT",
@@ -13,6 +13,7 @@
     "@xkeshi/vue-qrcode": "^1.0.0",
     "axios": "^0.18.0",
     "core-js": "^2.6.5",
+    "crypto": "^1.0.1",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
     "socket.io-client": "^2.2.0",

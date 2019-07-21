@@ -44,6 +44,7 @@ import { getUser } from "@/api/user";
 import { createCollect } from "@/api/collect";
 import { getMsgByFid, updateRead, deleteMsg } from "@/api/message";
 import { mapGetters } from "vuex";
+import { aesDecrypt, aesEncrypt } from "@/utils/func";
 import {
   Field,
   Button,
@@ -142,12 +143,14 @@ export default {
       } else {
         this.msg.from = this.user.id;
         this.msg.to = this.friend._id;
+        this.msg.content = aesEncrypt(this.msg.content)
         io.emit("sendmsg", this.msg);
         this.msg.content = "";
       }
     },
     receiveMsg() {
       io.on("getmsg", msg => {
+        msg.content = aesDecrypt(msg.content)
         if (msg.from == this.user.id && msg.to == this.friend._id) {
           msg.type = "send";
           this.msgList.push(msg);

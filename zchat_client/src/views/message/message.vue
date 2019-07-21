@@ -5,15 +5,17 @@
     </header>
     <section class="message-section">
       <van-search placeholder="搜索" v-model="keyword" @search="onSearch" />
-      <div class="item" @click="goChat(item.fid)" v-for="(item, index) in list" :key="index">
-        <img class="avatar" :src="item.avatar[0].content" />
-        <van-tag class="number" round type="danger" v-if="item.sum">{{ item.sum }}</van-tag>
-        <div class="content">
-          <span class="nickname">{{ item.nickname }}</span>
-          <span class="time">{{ item.time | moment('YYYY-MM-DD') }}</span>
-          <p class="msg van-ellipsis">{{ item.content }}</p>
+      <van-skeleton title avatar :row="3" :loading="loading">
+        <div class="item" @click="goChat(item.fid)" v-for="(item, index) in list" :key="index">
+          <img class="avatar" :src="item.avatar[0].content" />
+          <van-tag class="number" round type="danger" v-if="item.sum">{{ item.sum }}</van-tag>
+          <div class="content">
+            <span class="nickname">{{ item.nickname }}</span>
+            <span class="time">{{ item.time | moment('YYYY-MM-DD') }}</span>
+            <p class="msg van-ellipsis">{{ item.content }}</p>
+          </div>
         </div>
-      </div>
+      </van-skeleton>
     </section>
     <footer>
       <tabbar />
@@ -22,7 +24,7 @@
 </template>
 
 <script>
-import { Search, SwipeCell, Dialog, Tag } from "vant";
+import { Search, SwipeCell, Dialog, Tag, Skeleton } from "vant";
 import { Tabbar, NavBar } from "@/components";
 import { getMsg } from "@/api/message";
 import { mapGetters } from "vuex";
@@ -35,7 +37,8 @@ export default {
     [Search.name]: Search,
     [SwipeCell.name]: SwipeCell,
     [Dialog.name]: Dialog,
-    [Tag.name]: Tag
+    [Tag.name]: Tag,
+    [Skeleton.name]: Skeleton
   },
   computed: {
     ...mapGetters(["user"])
@@ -50,6 +53,7 @@ export default {
   created() {
     getMsg(this.user.id).then(res => {
       this.list = res.data;
+      this.loading = false;
     });
   },
   methods: {

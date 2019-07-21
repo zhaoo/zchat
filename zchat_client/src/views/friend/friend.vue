@@ -5,43 +5,55 @@
     </header>
     <section class="list-section">
       <van-search placeholder="搜索" v-model="keyword" @search="onSearch" />
-      <van-index-bar>
-        <van-index-anchor>朋友</van-index-anchor>
-        <van-cell
-          v-for="item in list"
-          :key="item.id"
-          :title="item.nickname"
-          :to="{ name: 'chat', params: {uid: item._id}}"
-          :icon="item.avatar[0].content"
-          clickable
-          size="large"
-        />
-      </van-index-bar>
+      <van-skeleton title avatar :row="3" :loading="loading">
+        <van-index-bar>
+          <van-index-anchor>朋友</van-index-anchor>
+          <van-cell
+            v-for="item in list"
+            :key="item.id"
+            :title="item.nickname"
+            :to="{ name: 'chat', params: {uid: item._id}}"
+            :icon="item.avatar[0].content"
+            clickable
+            size="large"
+          />
+        </van-index-bar>
+      </van-skeleton>
     </section>
     <section class="list-section">
-      <van-index-bar>
-        <van-index-anchor>AI机器人</van-index-anchor>
-        <van-cell title="小兆同学" to="robot" :icon="require('@/static/avatar/robot.jpg')" clickable size="large" />
-      </van-index-bar>
+      <van-skeleton title avatar :row="3" :loading="loading">
+        <van-index-bar>
+          <van-index-anchor>AI机器人</van-index-anchor>
+          <van-cell
+            title="小兆同学"
+            to="robot"
+            :icon="require('@/static/avatar/robot.jpg')"
+            clickable
+            size="large"
+          />
+        </van-index-bar>
+      </van-skeleton>
     </section>
     <section class="list-section">
-      <van-index-bar>
-        <van-index-anchor>小助手</van-index-anchor>
-        <van-cell
-          title="快递查询"
-          to="express"
-          :icon="require('@/static/avatar/express.jpg')"
-          clickable
-          size="large"
-        />
-        <van-cell
-          title="天气查询"
-          to="weather"
-          :icon="require('@/static/avatar/weather.jpg')"
-          clickable
-          size="large"
-        />
-      </van-index-bar>
+      <van-skeleton title avatar :row="3" :loading="loading">
+        <van-index-bar>
+          <van-index-anchor>小助手</van-index-anchor>
+          <van-cell
+            title="快递查询"
+            to="express"
+            :icon="require('@/static/avatar/express.jpg')"
+            clickable
+            size="large"
+          />
+          <van-cell
+            title="天气查询"
+            to="weather"
+            :icon="require('@/static/avatar/weather.jpg')"
+            clickable
+            size="large"
+          />
+        </van-index-bar>
+      </van-skeleton>
     </section>
     <footer>
       <tabbar />
@@ -50,7 +62,7 @@
 </template>
 
 <script>
-import { Search, IndexBar, IndexAnchor, Cell } from "vant";
+import { Search, IndexBar, IndexAnchor, Cell, Skeleton } from "vant";
 import { Tabbar, NavBar } from "@/components";
 import { fetchList } from "@/api/user";
 import { mapGetters } from "vuex";
@@ -63,7 +75,8 @@ export default {
     [Search.name]: Search,
     [IndexBar.name]: IndexBar,
     [IndexAnchor.name]: IndexAnchor,
-    [Cell.name]: Cell
+    [Cell.name]: Cell,
+    [Skeleton.name]: Skeleton
   },
   computed: {
     ...mapGetters(["user"])
@@ -71,7 +84,8 @@ export default {
   data() {
     return {
       list: {},
-      keyword: ""
+      keyword: "",
+      loading: true
     };
   },
   created() {
@@ -87,6 +101,7 @@ export default {
           1
         );
       });
+      this.loading = false;
     },
     onSearch() {
       this.$router.push({

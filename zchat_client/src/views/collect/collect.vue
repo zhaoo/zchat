@@ -5,14 +5,16 @@
     </header>
     <section class="list-section">
       <van-search placeholder="搜索" v-model="keyword" @search="onSearch" />
-      <div class="item" v-for="(item, index) in list" :key="index" @click="goDetailed(item._id)">
-        <img class="avatar" :src="item.avatar[0].content" />
-        <div class="content">
-          <span class="nickname">{{ item.nickname }}</span>
-          <span class="time">{{ item.time | moment('YYYY-MM-DD') }}</span>
-          <p class="msg van-ellipsis">{{ item.content }}</p>
+      <van-skeleton title avatar :row="3" :loading="loading">
+        <div class="item" v-for="(item, index) in list" :key="index" @click="goDetailed(item._id)">
+          <img class="avatar" :src="item.avatar[0].content" />
+          <div class="content">
+            <span class="nickname">{{ item.nickname }}</span>
+            <span class="time">{{ item.time | moment('YYYY-MM-DD') }}</span>
+            <p class="msg van-ellipsis">{{ item.content }}</p>
+          </div>
         </div>
-      </div>
+      </van-skeleton>
     </section>
   </div>
 </template>
@@ -21,18 +23,20 @@
 import { NavBar } from "@/components";
 import { mapGetters } from "vuex";
 import { getCollectByUid } from "@/api/collect";
-import { Search } from "vant";
+import { Search, Skeleton } from "vant";
 
 export default {
   name: "About",
   components: {
     NavBar,
-    [Search.name]: Search
+    [Search.name]: Search,
+    [Skeleton.name]: Skeleton
   },
   data() {
     return {
       list: {},
-      keyword: ""
+      keyword: "",
+      loading: true
     };
   },
   computed: {
@@ -46,6 +50,7 @@ export default {
       getCollectByUid(this.user.id).then(res => {
         this.list = res.data;
       });
+      this.loading = false;
     },
     goDetailed(id) {
       this.$router.push({ name: "detailed", params: { id: id } });
