@@ -2,7 +2,7 @@
 
 **zchat**是一款即时通讯`App(H5)`，基于`Vue`和`Express`开发，采用`HBuilderX`进行打包。
 
-[![Version](https://img.shields.io/badge/Release-0.1.0-green.svg)](https://github.com/izhaoo/zchat)
+[![Version](https://img.shields.io/badge/Release-0.1.1-green.svg)](https://github.com/izhaoo/zchat)
 [![License](https://img.shields.io/badge/License-MIT-red.svg)](https://mit-license.org/)
 
 [下载](https://github.com/izhaoo/zchat/releases)
