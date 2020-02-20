@@ -13,10 +13,11 @@
 
 ### 预览
 
-![1](https://pic.izhaoo.com/20190711212545.jpg)
-![2](https://pic.izhaoo.com/20190711212544.jpg)
-![3](https://pic.izhaoo.com/20190711212546.jpg)
-![4](https://pic.izhaoo.com/20190711212549.jpg)
+![1](http://qiniu.izhaoo.com/zchat-1.gif)
+
+![2](http://qiniu.izhaoo.com/zchat-2.gif)
+
+![3](http://qiniu.izhaoo.com/zchat-3.gif)
 
 ### 安装
 
