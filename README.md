@@ -13,11 +13,11 @@
 
 ### 预览
 
-![1](http://qiniu.izhaoo.com/zchat-1.gif)
+![1](https://github.com/izhaoo/zchat/blob/master/preview/zchat-1.gif)
 
-![2](http://qiniu.izhaoo.com/zchat-2.gif)
+![2](https://github.com/izhaoo/zchat/blob/master/preview/zchat-2.gif)
 
-![3](http://qiniu.izhaoo.com/zchat-3.gif)
+![3](https://github.com/izhaoo/zchat/blob/master/preview/zchat-3.gif)
 
 ### 安装
 
